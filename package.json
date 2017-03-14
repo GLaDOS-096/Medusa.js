@@ -1,0 +1,23 @@
+{
+  "name": "medusa.js",
+  "version": "0.1.0",
+  "description": "a lib detecting browser environments",
+  "main": "medusa.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/GLaDOS-096/Medusa.js.git"
+  },
+  "keywords": [
+    "detection",
+    "browser"
+  ],
+  "author": "GLaDOS-096",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GLaDOS-096/Medusa.js/issues"
+  },
+  "homepage": "https://github.com/GLaDOS-096/Medusa.js#readme"
+}
