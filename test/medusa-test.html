@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test for Medusa.js on browser</title>
+    <script src="medusa.test.js"></script>
+</head>
+<body style="font: consolas">
+    <div class="test-console">
+        <div>
+            User-Agent:
+            <span id="user-agent"></span>
+        </div>
+        <div>
+            Browser:
+            <span id="browser"></span>
+        </div>
+    </div>
+    <script>
+        // i will not use another file now 'cause it is troublesome
+        document.getElementById('user-agent').innerHTML = getUserAgent();
+    </script>
+</body>
+</html>
