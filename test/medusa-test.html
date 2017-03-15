@@ -19,7 +19,10 @@
     </div>
     <script>
         // i will not use another file now 'cause it is troublesome
-        document.getElementById('user-agent').innerHTML = getUserAgent();
+        var ua = Medusa.getUserAgent();
+        var bs = Medusa.parseUserAgent(ua).browser_str[1];
+        document.getElementById('user-agent').innerHTML = ua;
+        document.getElementById('browser').innerHTML = bs;
     </script>
 </body>
 </html>
