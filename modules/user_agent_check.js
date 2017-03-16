@@ -1,19 +1,4 @@
-// used as a unit test container
-// always the latest patterns inside
-
-var Medusa = {
-    /* this Medusa.extend() turns out to be all folly 
-     */
-    extend: function extend(props){
-        props.forEach(function(item,index){
-            if (item.name===""){
-                console.error("extension invalid: function name missing.")
-            } else {
-                Medusa[item.name] = item;
-            }
-        })
-    }
-}
+module.exports = user_agent_check
 
 var user_agent_check = [
     function getUserAgent(){
@@ -26,7 +11,7 @@ var user_agent_check = [
         var browser_str = _uas2[1].replace(/(^\s*)|(\s*$)/g, "").split(' ');
         var os_str = _uas2[0].split(' ');
         return {
-            header: h1,
+            head: h1,
             browser_str: browser_str,
             os_str: os_str
         }
@@ -38,5 +23,3 @@ var user_agent_check = [
         }
     }
 ]
-
-Medusa.extend(user_agent_check)
