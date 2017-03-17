@@ -20,7 +20,7 @@
     <script>
         // i will not use another file now 'cause it is troublesome
         var ua = Medusa.getUserAgent();
-        var bs = Medusa.parseUserAgent(ua).browser_str[1];
+        var bs = Medusa.getUABrowser();
         document.getElementById('user-agent').innerHTML = ua;
         document.getElementById('browser').innerHTML = bs;
     </script>
