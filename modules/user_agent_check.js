@@ -1,44 +1,44 @@
+// this module is for general user-agent checks.
+// could be wrong 'cause some certain explorers always immitate others
+
+module.exports = user_agent_check
+
 var user_agent_check = [
     function getUserAgent(){
         return navigator.userAgent;
     },
     function catchKeyword(ua,keyword){
+        function __match__(reg){
+            var re = ua.match(reg)
+            if (re==null){
+                return -1
+            } else {
+                return re[0].replace("/",": ")
+            }
+        }
         switch(keyword){
+            case "Gecko":
+                return __match__(RegExp(keyword+"\/[0-9]*"))
+                break
             case "Mozilla":
             case "Firefox":
             case "AppleWebKit":
             case "Safari":
+                return __match__(RegExp(keyword+"\/[0-9]*\.[0-9]*"))
+                break
             case "Version":
-                var re = ua.match(RegExp(keyword+"\/[0-9]*\.[0-9]*"))
-                if (re==null){
-                    return -1
-                } else {
-                    return re[0].replace("/",": ")
-                }
+                return __match__(RegExp(keyword+"\/[0-9]*\.[0-9]*\.[0-9]*"))
                 break
             case "Chrome":
             case "OPR":
-                var re = ua.match(RegExp(keyword+"\/[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*"))
-                if (re==null){
-                    return -1
-                } else {
-                    return re[0].replace("/",": ")
-                }
-                break
-            case "Gecko":
-                var re = ua.match(RegExp(keyword+"\/[0-9]*"))
-                if (re==null){
-                    return -1
-                } else {
-                    return re[0].replace("/",": ")
-                }
+                return __match__(RegExp(keyword+"\/[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*"))
                 break
             default:
                 console.error("keyword invalid: not in the dict.")
                 return -1
         }
     },
-    function getUABrowser(){
+    function getBrowserByUa(){
         var ua = Medusa.getUserAgent();
         var dict = ["Firefox","Chrome","Safari","OPR","AppleWebKit","Gecko","Version"]
         var result_map = [0,0,0,0,0,0,0]
@@ -53,24 +53,35 @@ var user_agent_check = [
             }
         })
         var __re__ = (function(result,result_map){
-            console.log(result_map)
-            switch(result_map){
-                case [1,0,0,0,0,1,0]:
-                   return result[0]
-                   break
-                case [0,1,1,0,1,0,0]:
-                    return result[1]
+            switch(result_map.join('')){
+                case "1000010":
+                    return {
+                        "browser": result[0],
+                        "kernel": result[5]
+                    }
                     break
-                case [0,0,1,0,1,0,1]:
-                    return result[2]
+                case "0110100":
+                    return {
+                        "browser": result[1],
+                        "kernel": result[4]
+                    }
                     break
-                case [0,1,1,1,1,0,0]:
-                    return result[3]
+                case "0010101":
+                    return {
+                        "browser": "Safari: " + result[6].split(': ')[1],
+                        "kernel": result[4]
+                    }
+                    break
+                case "0111100":
+                    return {
+                        "browser": "Opera: " + result[3].split(': ')[1],
+                        "kernel": result[4]
+                    }
                     break
                 default:
                     return "Unknown Browser"
             }
         })(result,result_map)
         return __re__
-    }
+    },
 ]

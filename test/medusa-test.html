@@ -16,13 +16,18 @@
             Browser:
             <span id="browser"></span>
         </div>
+        <div>
+            Kernel:
+            <span id="kernel"></span>
+        </div>
     </div>
     <script>
         // i will not use another file now 'cause it is troublesome
         var ua = Medusa.getUserAgent();
-        var bs = Medusa.getUABrowser();
+        var bs = Medusa.getBrowserByUa();
         document.getElementById('user-agent').innerHTML = ua;
-        document.getElementById('browser').innerHTML = bs;
+        document.getElementById('browser').innerHTML = bs.browser;
+        document.getElementById('kernel').innerHTML = bs.kernel;
     </script>
 </body>
 </html>
