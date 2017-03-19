@@ -90,25 +90,25 @@ var user_agent_check = [
                 case "10000000100":  // Firefox
                     return {
                         "browser": result[0],
-                        "kernel": result[5]
+                        "kernel": result[8]
                     }
                     break
                 case "01100001000":  // Chrome
                     return {
                         "browser": result[1],
-                        "kernel": result[4]
+                        "kernel": result[7]
                     }
                     break
                 case "00100001001":  // Safari
                     return {
                         "browser": "Safari: " + result[6].split(': ')[1],
-                        "kernel": result[4]
+                        "kernel": result[7]
                     }
                     break
                 case "01110001000":  // Opera
                     return {
                         "browser": "Opera: " + result[3].split(': ')[1],
-                        "kernel": result[4]
+                        "kernel": "Who knows."
                     }
                     break
                 case "00001000010":  // Internet Explorer 8+
@@ -137,4 +137,61 @@ var user_agent_check = [
     },
 ]
 
+var ie_spec = [
+    function ieSpecListGen(){
+        return [
+            "ActiveXObject",  // IE only is able to construct ActiveX Objects
+            "function.name",  // IE does not support 'name' property of [object Function]
+        ]
+    },
+    function ie_spec(){
+        var specList = Medusa.ieSpecListGen();
+        var specResult = [0,0];
+        specList.forEach(function(item,index){
+            switch(item){
+                case "ActiveXObject":
+                    try{
+                        var a = new ActiveXObject("Microsoft.XMLHttp")
+                    } catch(e){
+                        // nothing 
+                    } finally {
+                        if (a!=undefined){
+                            specResult[index] = 1
+                        } else {
+                            specResult[index] = 0
+                        }
+                    }
+                    break
+                case "function.name":
+                    function __dGVzdA__(){}
+                    if (__dGVzdA__.name!=undefined){
+                        specResult[index] = 1
+                    } else {
+                        specResult[index] = 0
+                    }
+                    break
+            }
+        })
+        var __re__ = (function(specList,specResult){
+            function __transfer__(code){
+                if (code==1){
+                    return "supported"
+                } else {
+                    return "not supported"
+                }
+            }
+            var result = [{},{}]
+            specResult.forEach(function(item,index){
+                result[index] = {
+                    "propName": specList[index],
+                    "propState": __transfer__(specResult[index])
+                }
+            })
+            return result
+        })(specList,specResult)
+        return __re__
+    }
+]
+
 Medusa.extend(user_agent_check)
+Medusa.extend(ie_spec)
