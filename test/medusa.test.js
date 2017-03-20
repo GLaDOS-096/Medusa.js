@@ -6,6 +6,7 @@ var Medusa = {
         props.forEach(function(item,index){
             if (item.name===""){
                 console.error("extension invalid: function name missing.")
+                return 
             } else if (item.name==undefined){
                 Medusa[item.toLocaleString().split('(')[0].split(' ')[1]] = item
             } else {
@@ -142,6 +143,7 @@ var ie_spec = [
         return [
             "ActiveXObject",  // IE only is able to construct ActiveX Objects
             "function.name",  // IE does not support 'name' property of [object Function]
+            "document.security"  // only IE supports document.security
         ]
     },
     function ie_spec(){
@@ -150,16 +152,11 @@ var ie_spec = [
         specList.forEach(function(item,index){
             switch(item){
                 case "ActiveXObject":
-                    try{
-                        var a = new ActiveXObject("Microsoft.XMLHttp")
-                    } catch(e){
-                        // nothing 
-                    } finally {
-                        if (a!=undefined){
-                            specResult[index] = 1
-                        } else {
-                            specResult[index] = 0
-                        }
+                    let a = new ActiveXObject("Microsoft.XMLHttp")
+                    if (a!=undefined){
+                        specResult[index] = 1
+                    } else {
+                        specResult[index] = 0
                     }
                     break
                 case "function.name":
@@ -170,6 +167,12 @@ var ie_spec = [
                         specResult[index] = 0
                     }
                     break
+                case "document.security":
+                    if (document.security!=undefined){
+                        specResult[index] = 1
+                    } else {
+                        specResult[index] = 0
+                    }
             }
         })
         var __re__ = (function(specList,specResult){
@@ -180,7 +183,7 @@ var ie_spec = [
                     return "not supported"
                 }
             }
-            var result = [{},{}]
+            var result = [{},{},{}]
             specResult.forEach(function(item,index){
                 result[index] = {
                     "propName": specList[index],

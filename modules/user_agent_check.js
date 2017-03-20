@@ -1,6 +1,3 @@
-// this module is for general user-agent checks.
-// could be wrong 'cause some certain explorers always immitate others
-
 module.exports = user_agent_check
 
 var user_agent_check = [

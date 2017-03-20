@@ -1,7 +1,3 @@
-// this module is to check what only IE supports
-// the other browsers although they tried to immitate IE in user-agent
-//   they still show the real props 
-
 module.exports = ie_spec.js
 
 var ie_spec = [
@@ -9,6 +5,7 @@ var ie_spec = [
         return [
             "ActiveXObject",  // IE only is able to construct ActiveX Objects
             "function.name",  // IE does not support 'name' property of [object Function]
+            "document.security"
         ]
     },
     function ie_spec(){
@@ -32,6 +29,12 @@ var ie_spec = [
                         specResult[index] = 0
                     }
                     break
+                case "document.security":
+                    if (document.security!=undefined){
+                        specResult[index] = 1
+                    } else {
+                        specResult[index] = 0
+                    }
             }
         })
         var __re__ = (function(specList,specResult){
@@ -42,7 +45,7 @@ var ie_spec = [
                     return "not supported"
                 }
             }
-            var result = [{},{}]
+            var result = [{},{},{}]
             specResult.forEach(function(item,index){
                 result[index] = {
                     "propName": specList[index],
