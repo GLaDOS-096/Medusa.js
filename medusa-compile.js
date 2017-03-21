@@ -3,6 +3,7 @@
 
 var fs = require('fs')
 var eol = require('os').EOL
+var extend_cmd = []
 
 function compile(file,iter){
     fs.stat(file,function(err,stats){
@@ -45,6 +46,7 @@ compile('./medusa.js',function(line,index){
             })
             break
         case /Medusa.extend/.test(line):
+            extend_cmd.push(line.split("'")[1])
             break
     }
 })
