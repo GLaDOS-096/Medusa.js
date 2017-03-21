@@ -1,5 +1,3 @@
-module.exports = ie_spec.js
-
 var ie_spec = [
     function ieSpecListGen(){
         return [
@@ -57,3 +55,5 @@ var ie_spec = [
         return __re__
     }
 ]
+
+module.exports = ie_spec.js

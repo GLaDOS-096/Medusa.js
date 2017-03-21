@@ -1,6 +1,6 @@
 // ought to be medusa config file for medusa-compile
 
-import 'Medusa' 
+import 'medusa.core' 
 
 import 'user_agent_check'
 import 'ie_spec'

@@ -15,10 +15,8 @@ Medusa.js
         medusa-test-serer.js    // static file server for Medusa tests
         medusa-test.html    // show test results directly on pages
         medusa.test.js    // the immitated compiled version of Medusa.js
-    target
-        medusa.core.js    // only the extension system
-        /* supposed to be compiled version here */
     modules
+        medusa.core.js    // core function of Medusa.js
         user_agent_check.js    // basic module for checking user-agent of requests
         ie_spec.js    // specify something which only works on IE
         /* supposed to be more modules here */
@@ -52,6 +50,7 @@ var $module_name = [
     },
     ...
 ]
+module.exports = $module_name
 ```
 I have to inform that Medusa module system does not support anonymus functions, which means if anonymus functions are used such as `(function(){})()` or `let a = function(){}`, an error will be thrown by Medusa.
 
@@ -59,7 +58,7 @@ Well in the entrance file `medusa.js` we import everything we want and at last i
 ```javascript
 // entrance of medusa
 
-import 'Medusa' 
+import 'medusa.core' 
 // this ought to be necessary and put at head of all 'import's
 
 import 'user_agent_check'
@@ -79,7 +78,7 @@ Then you only have to run the `medusa-compile.js` on NodeJS like this, you'll ge
 node medusa-compile.js > medusa_bundle.js
 
 # or you can bind this command in ~/.bashrc
-alias medusa_compile="node /path/to/medusa-compile.js"
+alias medusa-compile="node /path/to/medusa-compile.js"
 # then
 medusa-compile > medusa_bundle.js
 ```

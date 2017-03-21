@@ -31,14 +31,12 @@ compile('./medusa.js',function(line,index){
     switch(true){
         case /import/.test(line):
             var module_name = line.split("'")[1]
-            if (module_name!='Medusa'){
-                module_name = module_name
-            } else {
-                module_name = 'medusa.core'
-            }
             compile('./modules/'+module_name+".js",function(line,index){
                 switch(true){
                     case /module.exports/.test(line):
+                        if (module_name!='medusa.core'){
+                            console.log('Medusa.extend('+module_name+')')
+                        }
                         break
                     default:
                         console.log(line)

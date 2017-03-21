@@ -1,5 +1,3 @@
-module.exports = Medusa
-
 var Medusa = {
     extend: function extend(props){
         props.forEach(function(item,index){
@@ -14,3 +12,4 @@ var Medusa = {
         })
     }
 }
+module.exports = modusa.core

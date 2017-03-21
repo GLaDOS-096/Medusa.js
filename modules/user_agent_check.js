@@ -1,5 +1,3 @@
-module.exports = user_agent_check
-
 var user_agent_check = [
     function getUserAgent(){
         return navigator.userAgent;
@@ -75,25 +73,25 @@ var user_agent_check = [
                 case "10000000100":  // Firefox
                     return {
                         "browser": result[0],
-                        "kernel": result[5]
+                        "kernel": result[8]
                     }
                     break
                 case "01100001000":  // Chrome
                     return {
                         "browser": result[1],
-                        "kernel": result[4]
+                        "kernel": result[7]
                     }
                     break
                 case "00100001001":  // Safari
                     return {
                         "browser": "Safari: " + result[6].split(': ')[1],
-                        "kernel": result[4]
+                        "kernel": result[7]
                     }
                     break
                 case "01110001000":  // Opera
                     return {
                         "browser": "Opera: " + result[3].split(': ')[1],
-                        "kernel": result[4]
+                        "kernel": result[7]
                     }
                     break
                 case "00001000010":  // Internet Explorer 8+
@@ -121,3 +119,5 @@ var user_agent_check = [
         return __re__
     },
 ]
+
+module.exports = user_agent_check
