@@ -51,6 +51,7 @@ var $module_name = [
     ...
 ]
 module.exports = $module_name
+// this 'module.exports' line ought to be at the bottom o fthe module.
 ```
 I have to inform that Medusa module system does not support anonymus functions, which means if anonymus functions are used such as `(function(){})()` or `let a = function(){}`, an error will be thrown by Medusa.
 
