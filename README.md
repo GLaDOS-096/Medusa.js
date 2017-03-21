@@ -75,7 +75,7 @@ Medusa.extend('user_agent_log')
 ```
 Then you only have to run the `medusa-compile.js` on NodeJS like this, you'll get the bundle of compiled Medusa.js
 ```shell
-# It is on Linux
+# It is very much like the famous browserify tool
 node medusa-compile.js > medusa_bundle.js
 
 # or you can bind this command in ~/.bashrc
