@@ -13,6 +13,10 @@
             <span id="user-agent"></span>
         </div>
         <div>
+            Posibilities:
+            <span id="bom-check"></span>
+        </div>
+        <div>
             Browser:
             <span id="browser"></span>
         </div>
@@ -25,7 +29,9 @@
         // i will not use another file now 'cause it is troublesome
         var ua = Medusa.getUserAgent();
         var bs = Medusa.getBrowserByUa();
+        var bc = Medusa.bom_check();
         document.getElementById('user-agent').innerHTML = ua;
+        document.getElementById('bom-check').innerHTML = bc;
         document.getElementById('browser').innerHTML = bs.browser;
         document.getElementById('kernel').innerHTML = bs.kernel;
     </script>

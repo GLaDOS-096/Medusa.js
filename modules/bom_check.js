@@ -5,7 +5,6 @@ var bom_check = [
             "navigator.cpuClass",
             "navigator.oscpu", 
             "navigator.userProfile",
-            "navigator.onLine",
             "navigator.appMinorVersion",
             "navigator.userLanguage",
             "screen.availLeft",
@@ -16,34 +15,50 @@ var bom_check = [
             "screen.top"
         ]
     },
-    function bom_check(){
+    function bomFeatureTest(mode){
         var bomFeatureList = Medusa.bomFeatureListGen()
         result = []
+        condition=  []
         bomFeatureList.forEach(function(item,index){
             switch(item){
                 case "navigator.oscpu":
                     if (navigator.oscpu!=undefined){
                         result.push("Firefox")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "navigator.buildID":
                     if (navigator.buildID!=undefined){
                         result.push("Firefox")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "screen.left":
                     if (screen.left!=undefined){
                         result.push("Firefox")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "screen.top":
                     if (screen.top!=undefined){
                         result.push("Firefox")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "navigator.userProfile":
                     if (navigator.userProfile!=undefined){
                         result.push("IE")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "navigator.cpuClass":
@@ -54,41 +69,80 @@ var bom_check = [
                 case "screen.deviceXDPI":
                     if (screen.deviceXDPI!=undefined){
                         result.push("IE")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "screen.deviceYDPI":
                     if (screen.deviceYDPI!=undefined){
                         result.push("IE")
-                    }
-                    break
-                case "navigator.onLine":
-                    if (!navigator.onLine){
-                        result.push("Safari,Chrome")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "navigator.appMinorVerison":
                     if (navigator.appMinorVersion!=undefined){
-                        result.push("IE,Opera")
+                        result.push("IE")
+                        result.push("Oprea")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "navigator.userLanguage":
                     if (navigator.userLanguage!=undefined){
-                        result.push("IE,Opera")
+                        result.push("IE")
+                        result.push("Oprea")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "screen.availLeft":
                     if (screen.availLeft!=undefined){
-                        result.push("Firefox,Chrome,Safari")
+                        result.push("Firefox")
+                        result.push("Safari")
+                        result.push("Chrome")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
                 case "screen.availTop":
                     if (screen.availTop!=undefined){
-                        result.push("Firefox,Chrome,Safari")
+                        result.push("Firefox")
+                        result.push("Safari")
+                        result.push("Chrome")
+                        condition.push("supported")
+                    } else {
+                        condition.push("not supported")
                     }
                     break
             }
         })
-        return result
+        if (mode=="condition"){
+            return condition
+        } else if (mode=="result"){
+            return result
+        } else {
+            return
+        }
+    },
+    function bom_check(){
+        var posiblities = Medusa.bomFeatureTest('result')
+        function unique(arr) {
+            var result = [], hash = {};
+            for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+                if (!hash[elem]) {
+                    result.push(elem);
+                    hash[elem] = true;
+                }
+            }
+            return result;
+        }
+        return unique(posiblities).join(',')
     }
 ]
 
