@@ -26,14 +26,19 @@
         </div>
     </div>
     <script>
-        // i will not use another file now 'cause it is troublesome
-        var ua = Medusa.getUserAgent();
-        var bs = Medusa.getBrowserByUa();
-        var bc = Medusa.bom_check();
-        document.getElementById('user-agent').innerHTML = ua;
-        document.getElementById('bom-check').innerHTML = bc;
-        document.getElementById('browser').innerHTML = bs.browser;
-        document.getElementById('kernel').innerHTML = bs.kernel;
+        Medusa.render([{
+            el: '#user-agent',
+            content: Medusa.getUserAgent()
+        },{
+            el: '#bom-check',
+            content: Medusa.bom_check()
+        },{
+            el: '#browser',
+            content: Medusa.getBrowserByUa().browser
+        },{
+            el: '#kernel',
+            content: Medusa.getBrowserByUa().kernel
+        }])
     </script>
 </body>
 </html>

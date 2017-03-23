@@ -44,5 +44,5 @@ compile('./medusa.js',function(line,index){
             break
         case /Medusa.extend/.test(line):
             break
-    } 
+    }
 })

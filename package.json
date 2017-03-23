@@ -1,10 +1,11 @@
 {
   "name": "medusa.js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "a lib detecting browser environments",
   "main": "medusa.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./medusa-compile.js > ./test/medusa.test.js",
+    "build": "node ./medusa-compile.js"
   },
   "repository": {
     "type": "git",

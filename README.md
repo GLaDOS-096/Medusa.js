@@ -11,6 +11,7 @@
 ```javascript
 Medusa.js
     medusa.js    // used to compile bundles
+    medusa-compile.js    // a simple compile for Medusa.js
     test
         medusa-test-serer.js    // static file server for Medusa tests
         medusa-test.html    // show test results directly on pages
@@ -19,6 +20,7 @@ Medusa.js
         medusa.core.js    // core function of Medusa.js
         user_agent_check.js    // basic module for checking user-agent of requests
         ie_spec.js    // specify something which only works on IE
+        bom_check.js    // check BOM features of different browsers
         /* supposed to be more modules here */
 ```
 
@@ -82,6 +84,10 @@ node medusa-compile.js > medusa_bundle.js
 alias medusa-compile="node /path/to/medusa-compile.js"
 # then
 medusa-compile > medusa_bundle.js
+
+# now with '/path/to/Medusa.js' as cwd, you can simply run these commands
+npm run test # build the file to ./test/medusa.test.js
+npm run build > medusa_bundle.js # real 'build'
 ```
 The `medusa_bundle.js` can be any file you want.
 
