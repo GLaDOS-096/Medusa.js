@@ -37,6 +37,19 @@ This is the core function of Medusa, which uses it to load modules. These module
 
 This is how to use the modules right after `Medusa.extend()`. If we have a `function a(){}` in the module, we just use it as `Medusa.a()`.
 
+`Medusa.render(rndArr)`
+
+This function is intended to render the results into binded DOM elements. Nothing else to understand, just packed operations. It is used like this:
+```javascript
+Medusa.render([{
+    el: '#user-agent',
+    content: Medusa.getUserAgent()
+},{
+    el: '#bom-check',
+    content: Medusa.bom_check()
+}])
+```
+
 <br>
 
 ## Loading and Registering modules
